@@ -8,19 +8,19 @@ using namespace std;
 
 void drawHist(Mat& hist, int type,string name)
 {
-	// ´´½¨Ö±·½Í¼»æÖÆ´°¿Ú
+	// åˆ›å»ºç›´æ–¹å›¾ç»˜åˆ¶çª—å£
 	int histWidth = 512;
 	int histHeight = 400;
 	cv::Mat histImage(histHeight, histWidth, CV_8UC3, cv::Scalar(0, 0, 0));
-	// ¶ÔÖ±·½Í¼½øĞĞ¹éÒ»»¯
+	// å¯¹ç›´æ–¹å›¾è¿›è¡Œå½’ä¸€åŒ–
 	cv::normalize(hist, hist, 1, 0, type, -1, cv::Mat());
-	// »æÖÆÖ±·½Í¼
+	// ç»˜åˆ¶ç›´æ–¹å›¾
 	int binWidth = 2;
 	for (int i = 1; i <= hist.rows; i++)
 	{
 		cv::line(histImage, cv::Point(binWidth * (i-1), histHeight-1), cv::Point(binWidth * i-1, histHeight - cvRound(20*histHeight*hist.at<float>(i-1))-1), cv::Scalar(255, 255, 255));
 	}
-	// ÏÔÊ¾Ö±·½Í¼
+	// æ˜¾ç¤ºç›´æ–¹å›¾
 	cv::imshow(name, histImage);
 }
 
@@ -97,10 +97,10 @@ void ransac(vector<DMatch> gdm, vector<KeyPoint> kps1, vector<KeyPoint> kps2, ve
 
 int main(int argc, char** agrv) {
 	//Mat imgg = imread("chess0.jpg");
-	Mat img = imread("C:/Users/wfs/Pictures/Á½ĞÇó¦Ğ·´òÓ®Á½¸öÈıĞÇÎå·Ñ.png");
+	Mat img = imread("C:/Users/wfs/Pictures/123456.png");
 	Mat socer = imread("C:/Users/wfs/Pictures/socear.png");
 	Mat socear = imread("C:\\Users\\wfs\\Desktop\\opencv\\opencv\\opencv\\socear.png",IMREAD_GRAYSCALE);
-	//Mat book = imread("C:/Users/wfs/Pictures/¸ü¶à.png");
+	//Mat book = imread("C:/Users/wfs/Pictures/æ›´å¤š.png");
 	//Mat mask = imread("C:/Users/wfs/Desktop/opencv/opencv/opencv/OR_MASK.jpg");
 	Mat lena = imread("lena.png");
 	Mat lenahead = imread("lenahead.png");
@@ -110,7 +110,7 @@ int main(int argc, char** agrv) {
 	cvtColor(lenahead, lenahead, COLOR_BGR2GRAY);
 	cvtColor(lenagray, lenagray, COLOR_BGR2GRAY);
 	cvtColor(img, img, COLOR_BGR2GRAY);
-	equalizeHist(socear, socear); //Ö±·½Í¼¾ùºâ»¯ £¬Ö»ÄÜµ¥Í¨µÀ
+	equalizeHist(socear, socear); //ç›´æ–¹å›¾å‡è¡¡åŒ– ï¼Œåªèƒ½å•é€šé“
 
 	//Mat socear = socer(Range(400,1200), Range(242,1035));
 	//imwrite("socear.png", socear);
@@ -118,17 +118,17 @@ int main(int argc, char** agrv) {
 	//img.convertTo(img,CV_8U,(0,255));
 	//convertScaleAbs(img, img, 1.0 / 256.0, 0.0);
 
-	//Êı¾İÀàĞÍ
+	//æ•°æ®ç±»å‹
 
-	//CV_8U: 8 Î»ÎŞ·ûºÅÕûÊı£¬Õ¼ÓÃ 1 ¸ö×Ö½Ú¡£
-	//CV_8S: 8 Î»ÓĞ·ûºÅÕûÊı£¬Õ¼ÓÃ 1 ¸ö×Ö½Ú¡£
-	//CV_16U : 16 Î»ÎŞ·ûºÅÕûÊı£¬Õ¼ÓÃ 2 ¸ö×Ö½Ú¡£
-	//CV_16S : 16 Î»ÓĞ·ûºÅÕûÊı£¬Õ¼ÓÃ 2 ¸ö×Ö½Ú¡£
-	//CV_32S : 32 Î»ÓĞ·ûºÅÕûÊı£¬Õ¼ÓÃ 4 ¸ö×Ö½Ú¡£
-	//CV_32F : 32 Î»¸¡µãÊı£¬Õ¼ÓÃ 4 ¸ö×Ö½Ú¡£
-	//CV_64F : 64 Î»¸¡µãÊı£¬Õ¼ÓÃ 8 ¸ö×Ö½Ú¡£
+	//CV_8U: 8 ä½æ— ç¬¦å·æ•´æ•°ï¼Œå ç”¨ 1 ä¸ªå­—èŠ‚ã€‚
+	//CV_8S: 8 ä½æœ‰ç¬¦å·æ•´æ•°ï¼Œå ç”¨ 1 ä¸ªå­—èŠ‚ã€‚
+	//CV_16U : 16 ä½æ— ç¬¦å·æ•´æ•°ï¼Œå ç”¨ 2 ä¸ªå­—èŠ‚ã€‚
+	//CV_16S : 16 ä½æœ‰ç¬¦å·æ•´æ•°ï¼Œå ç”¨ 2 ä¸ªå­—èŠ‚ã€‚
+	//CV_32S : 32 ä½æœ‰ç¬¦å·æ•´æ•°ï¼Œå ç”¨ 4 ä¸ªå­—èŠ‚ã€‚
+	//CV_32F : 32 ä½æµ®ç‚¹æ•°ï¼Œå ç”¨ 4 ä¸ªå­—èŠ‚ã€‚
+	//CV_64F : 64 ä½æµ®ç‚¹æ•°ï¼Œå ç”¨ 8 ä¸ªå­—èŠ‚ã€‚
 
-	//Êı¾İ¶ÁÈ¡
+	//æ•°æ®è¯»å–
 
 	//Mat A = (Mat_<int>(3, 3) << 1, 2, 5, 4, 5, 6, 7, 8, 9);
 	//Mat B1 = Mat(5, 5, CV_8UC1,Scalar(4,5,6));
@@ -140,7 +140,7 @@ int main(int argc, char** agrv) {
 	//cout << vc << endl;
 	//cout << (int)vc.val[0] << endl;
 	//cout << B3 << endl;
-	//·µ»ØµÄÊÇÃ¿Ò»ĞĞ£¬ÁĞµÄ×Ö½ÚÊı
+	//è¿”å›çš„æ˜¯æ¯ä¸€è¡Œï¼Œåˆ—çš„å­—èŠ‚æ•°
 	//cout <<  (int)(*(B3.data + B3.step[0] * 1 + B3.step[1] * 2 + 2)) << endl;
 	//cout << (int)(*(B3.data + B3.step[0] * 1 + B3.step[1] * 2 + 1)) << endl;
 	//cout << (int)(*(B3.data + B3.step[0] * 1 + B3.step[1] * 2 + 0)) << endl;
@@ -157,10 +157,10 @@ int main(int argc, char** agrv) {
 	// im.write();
 	//waitKey(0);
 
-	//matÔËËã
-	//*Ïà³Ë  £¬dotÄÚ»ı £¬mul¶ÔÓ¦Î»Ïà³Ë
+	//matè¿ç®—
+	//*ç›¸ä¹˜  ï¼Œdotå†…ç§¯ ï¼Œmulå¯¹åº”ä½ç›¸ä¹˜
 
-	//ÉãÏñÍ·
+	//æ‘„åƒå¤´
 	//Mat img;
 	//VideoCapture vc(0);
 	////vc >> img;
@@ -180,9 +180,9 @@ int main(int argc, char** agrv) {
 	//	waitKey(50);
 	//}
 
-	////Í¼ÏñÊı¾İÀàĞÍ×ª»»  RGB,HSV£¨É«¶È£¬±¥ºÍ¶È£¬ÁÁ¶È £© GRAY=R*0.3+G*0.59+B*0.11
+	////å›¾åƒæ•°æ®ç±»å‹è½¬æ¢  RGB,HSVï¼ˆè‰²åº¦ï¼Œé¥±å’Œåº¦ï¼Œäº®åº¦ ï¼‰ GRAY=R*0.3+G*0.59+B*0.11
 	
-	////8U :0-255,32F:0-1,d64f:0-1      >1Îª°×É« £¬<1ÎªºÚÉ«
+	////8U :0-255,32F:0-1,d64f:0-1      >1ä¸ºç™½è‰² ï¼Œ<1ä¸ºé»‘è‰²
 	//Mat img32,HSV,HSV_32,gray,gray_32;
 	//img.convertTo(img32, CV_32F, 1 / 255.0, 0);
 	//cvtColor(img, HSV, COLOR_BGR2HSV);
@@ -210,14 +210,14 @@ int main(int argc, char** agrv) {
 	//Mat green;
 	//merge(imgsv, green);
 
-	////Í¼ÏñÏñËØ±È½Ï ĞèÒª´óĞ¡£¬Í¨µÀÊı£¬Êı¾İÀàĞÍÒ»Ñù
+	////å›¾åƒåƒç´ æ¯”è¾ƒ éœ€è¦å¤§å°ï¼Œé€šé“æ•°ï¼Œæ•°æ®ç±»å‹ä¸€æ ·
 	
-	////min max£¨src1£¬src2£¬out£©
+	////min maxï¼ˆsrc1ï¼Œsrc2ï¼Œoutï¼‰
 	//Mat Min, Max;
 	//min(socer, book, Min);
-	////minMaxLoc  ·µ»Ø×î´ó×îĞ¡ÏñËØÖµ¼°Æä×ø±ê£¬¿ÉÒÔÓĞÑÚÂë¾ØÕó
+	////minMaxLoc  è¿”å›æœ€å¤§æœ€å°åƒç´ å€¼åŠå…¶åæ ‡ï¼Œå¯ä»¥æœ‰æ©ç çŸ©é˜µ
 
-	////Óë »ò ·Ç Òì»ò  0-255»¯Îª¶ş½øÖÆ£¬¶ÔÃ¿Î»½øĞĞÔËËã   0-11111111
+	////ä¸ æˆ– é å¼‚æˆ–  0-255åŒ–ä¸ºäºŒè¿›åˆ¶ï¼Œå¯¹æ¯ä½è¿›è¡Œè¿ç®—   0-11111111
 	
 	//Mat AND, OR, NOT, XOR;
 	//bitwise_not(img, NOT, mask);
@@ -243,14 +243,14 @@ int main(int argc, char** agrv) {
 	////cvtColor(OR, ORG, COLOR_BGR2GRAY);
 	////imwrite("OR_MASK.png", ORG);
 
-	////ãĞÖµ¶şÖµ»¯ 5ÖÖÌõ¼ş
+	////é˜ˆå€¼äºŒå€¼åŒ– 5ç§æ¡ä»¶
 	
 	//Mat gimg;
 	//threshold(img, gimg, 127, 255, THRESH_BINARY);
 	//cvtColor(img, img, COLOR_BGR2GRAY);
 	//adaptiveThreshold(img, img, 255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 51, 0);
 
-//	//LUT²éÕÒ±í
+//	//LUTæŸ¥æ‰¾è¡¨
 
 //uchar Lutfirst[256];
 //for (int i = 0; i < 256; i++)
@@ -265,9 +265,9 @@ int main(int argc, char** agrv) {
 //Mat lutone(1, 256, CV_8UC1, Lutfirst);
 //LUT(img, lutone, img);
 
-////Í¼ÏñËõ·Å£¬·­×ª£¬Æ´½Ó
+////å›¾åƒç¼©æ”¾ï¼Œç¿»è½¬ï¼Œæ‹¼æ¥
 
-//resize(img, img, Size(512, 512), 0, 0, INTER_AREA); //ÓÃsize¾Í²»ÓÃÖá²ÎÊıÁË
+//resize(img, img, Size(512, 512), 0, 0, INTER_AREA); //ç”¨sizeå°±ä¸ç”¨è½´å‚æ•°äº†
 //resize(img, img, Size(1682, 1392), 0, 0, INTER_NEAREST);
 //resize(img, img, Size(1682, 1392), 0, 0, INTER_LINEAR);
 //resize(img, img, Size(1682, 1392), 0, 0, INTER_CUBIC);
@@ -275,7 +275,7 @@ int main(int argc, char** agrv) {
 //hconcat(img, img, img);
 //vconcat(img, img, img);
 
-////Í¼Æ¬Ğı×ª£¬·ÂÉä±ä»»
+////å›¾ç‰‡æ—‹è½¬ï¼Œä»¿å°„å˜æ¢
 
 //Mat rotation_matrix1 = getRotationMatrix2D(Point2f(800.0, 700.0), 60, 1);
 //warpAffine(img, img, rotation_matrix1, img.size());
@@ -290,14 +290,14 @@ int main(int argc, char** agrv) {
 //Mat rotation_matrix2 = getAffineTransform(src,dst);
 //warpAffine(img, img, rotation_matrix2, img.size());
 
-//Í¸ÊÓ±ä»»£¨ËÄµã±ä»»£©
+//é€è§†å˜æ¢ï¼ˆå››ç‚¹å˜æ¢ï¼‰
 //Mat persp_matrix = getPerspectiveTransform(Point2f src, Point2f dst);
 //warpPerspective(img, img, persp_matrix, img.size());
 
-//×÷Í¼
+//ä½œå›¾
 //circle line rectangle fillPolv putText
 
-////ROI½ØÈ¡
+////ROIæˆªå–
 
 //Mat imgr = img(Range(100, 1000), Range(200, 1500));
 //Rect rec(100,100,500,500);
@@ -305,7 +305,7 @@ int main(int argc, char** agrv) {
 //Mat copy;
 //img.copyTo(copy,mask);
 
-////¸ßË¹½ğ×ÖËş ÏÂ²ÉÑù£¨ËõĞ¡³ß´ç£©£»Ëõ·Å²»±äĞÔ£¨ÌØÕ÷Öµ£©
+////é«˜æ–¯é‡‘å­—å¡” ä¸‹é‡‡æ ·ï¼ˆç¼©å°å°ºå¯¸ï¼‰ï¼›ç¼©æ”¾ä¸å˜æ€§ï¼ˆç‰¹å¾å€¼ï¼‰
 
 ////pyrDown(img, img);
 //vector<Mat> Guass;
@@ -322,7 +322,7 @@ int main(int argc, char** agrv) {
 //}
 //waitKey(0);
 
-////À­ÆÕÀ­Ë¹½ğ×ÖËş ÉÏÏÂ²ÉÑù½áºÏ
+////æ‹‰æ™®æ‹‰æ–¯é‡‘å­—å¡” ä¸Šä¸‹é‡‡æ ·ç»“åˆ
 
 //vector<Mat> Guass;
 //Guass.push_back(socer);
@@ -356,39 +356,39 @@ int main(int argc, char** agrv) {
 //}
 //waitKey(0);
 
-////Í³¼ÆÖ±·½Í¼
+////ç»Ÿè®¡ç›´æ–¹å›¾
 
-//// ¶¨ÒåÖ±·½Í¼²ÎÊı
-//int histSize = 256;    // Ö±·½Í¼µÄbinÊıÄ¿
-//float range[] = { 0, 256 };    // ÏñËØÖµ·¶Î§
+//// å®šä¹‰ç›´æ–¹å›¾å‚æ•°
+//int histSize = 256;    // ç›´æ–¹å›¾çš„binæ•°ç›®
+//float range[] = { 0, 256 };    // åƒç´ å€¼èŒƒå›´
 //const float* histRange = { range };
-//// ¼ÆËãÖ±·½Í¼
+//// è®¡ç®—ç›´æ–¹å›¾
 //cv::Mat hist;
 //cv::calcHist(&socear, 1, 0, cv::Mat(), hist, 1, &histSize, &histRange);
-//// ´´½¨Ö±·½Í¼»æÖÆ´°¿Ú
+//// åˆ›å»ºç›´æ–¹å›¾ç»˜åˆ¶çª—å£
 //int histWidth = 512;
 //int histHeight = 400;
 //cv::Mat histImage(histHeight, histWidth, CV_8UC3, cv::Scalar(0, 0, 0));
-//// ¶ÔÖ±·½Í¼½øĞĞ¹éÒ»»¯
+//// å¯¹ç›´æ–¹å›¾è¿›è¡Œå½’ä¸€åŒ–
 //cv::normalize(hist, hist, 0, histImage.rows, cv::NORM_MINMAX, -1, cv::Mat());
-//// »æÖÆÖ±·½Í¼
+//// ç»˜åˆ¶ç›´æ–¹å›¾
 //int binWidth = cvRound((double)histWidth / histSize);
 //for (int i = 0; i < histSize; i++)
 //{
 //	cv::line(histImage, cv::Point(binWidth * i, histHeight), cv::Point(binWidth * i, histHeight - cvRound(hist.at<float>(i))), cv::Scalar(255, 255, 255));
 //}
-//// ÏÔÊ¾Ö±·½Í¼
+//// æ˜¾ç¤ºç›´æ–¹å›¾
 //imshow("scoear", socear);
 //cv::imshow("Histogram", histImage);
 //cv::waitKey(0);
 
-////Ö±·½Í¼Æ¥Åä     Í¨¹ıÔ­ÓëÄ¿±êÖ±·½Í¼Ö®¼ä¸÷ÏñËØÖ®¼äµÄÀÛ»ı¸ÅÂÊÖ®²îµÄ×îĞ¡ÖµÀ´È·¶¨ÏñËØÓ³Éä¹ØÏµ
+////ç›´æ–¹å›¾åŒ¹é…     é€šè¿‡åŸä¸ç›®æ ‡ç›´æ–¹å›¾ä¹‹é—´å„åƒç´ ä¹‹é—´çš„ç´¯ç§¯æ¦‚ç‡ä¹‹å·®çš„æœ€å°å€¼æ¥ç¡®å®šåƒç´ æ˜ å°„å…³ç³»
 
-////¹¹½¨²îÖµ¾ØÕó£¬ÕÒÃ¿Ò»ĞĞ×îĞ¡ÖµÈ·¶¨LutÓ³Éä¹ØÏµ£¬LutÆ¥ÅäÖ±·½Í¼¡£
-//int histSize = 256;    // Ö±·½Í¼µÄbinÊıÄ¿
-//float range[] = { 0, 256 };    // ÏñËØÖµ·¶Î§
+////æ„å»ºå·®å€¼çŸ©é˜µï¼Œæ‰¾æ¯ä¸€è¡Œæœ€å°å€¼ç¡®å®šLutæ˜ å°„å…³ç³»ï¼ŒLutåŒ¹é…ç›´æ–¹å›¾ã€‚
+//int histSize = 256;    // ç›´æ–¹å›¾çš„binæ•°ç›®
+//float range[] = { 0, 256 };    // åƒç´ å€¼èŒƒå›´
 //const float* histRange = { range };
-//// ¼ÆËãÖ±·½Í¼
+//// è®¡ç®—ç›´æ–¹å›¾
 //cv::Mat hist1,hist2;
 //cv::calcHist(&img, 1, 0, cv::Mat(), hist1, 1, &histSize, &histRange);
 //cv::calcHist(&socear, 1, 0, cv::Mat(), hist2, 1, &histSize, &histRange);
@@ -428,21 +428,21 @@ int main(int argc, char** agrv) {
 //imshow("socear", res);
 //waitKey(0);
 
-//Í¼ÏñÄ£°åÆ¥Åä
+//å›¾åƒæ¨¡æ¿åŒ¹é…
 
 //Mat result;
 //matchTemplate(lena,lenahead,result, TM_CCOEFF_NORMED);
 //double maxVal, minVal;
 //Point minLoc, maxLoc;
-////Ñ°ÕÒÆ¥Åä½á¹ûÖĞµÄ×î´óÖµºÍ×îĞ¡ÖµÒÔ¼°×ø±êÎ»ÖÃ
+////å¯»æ‰¾åŒ¹é…ç»“æœä¸­çš„æœ€å¤§å€¼å’Œæœ€å°å€¼ä»¥åŠåæ ‡ä½ç½®
 //minMaxLoc(result, &minVal, &maxVal, &minLoc, &maxLoc);
-////»æÖÆ×î¼ÑÆ¥ÅäÇøÓò
+////ç»˜åˆ¶æœ€ä½³åŒ¹é…åŒºåŸŸ
 //rectangle(lena, cv::Rect(maxLoc.x, maxLoc.y, lenahead.cols, lenahead.rows), Scalar(0, 0, 255), 2);
 //imshow("lena", lena);
 //imshow("res", result);
 //waitKey(0);
 
-//Í¼Ïñ¾í»ı
+//å›¾åƒå·ç§¯
 
 //Mat kernel = (Mat_<float>(3, 3) << 1, 2, 1, 2, 0, 2, 1, 2, 1);
 //Mat kernel_norm = kernel / 12;
@@ -450,7 +450,7 @@ int main(int argc, char** agrv) {
 //filter2D(lena, filter, -1,kernel_norm);
 //imshow("fil",filter);
 
-//Í¼ÏñÔëÉù
+//å›¾åƒå™ªå£°
 
 //addsalt(lena, 10000);
 //addsalt(lenagray, 10000);
@@ -460,70 +460,70 @@ int main(int argc, char** agrv) {
 //imwrite("lenagray.png",lenagray);
 //Mat lena_noise = Mat::zeros(lena.rows, lena.cols, lena.type());
 //Mat equalLena_noise = Mat::zeros(lena.rows, lena.cols, lenagray.type());
-//imshow("lenaÔ­Í¼", lena);
-//imshow("equalLenaÔ­Í¼", lenagray);
-//RNG rng; //´´½¨Ò»¸öRNGÀà
-//rng.fill(lena_noise, RNG::NORMAL, 10, 20); //Éú³ÉÈıÍ¨µÀµÄ¸ßË¹·Ö²¼Ëæ»úÊı
-//rng.fill(equalLena_noise, RNG::NORMAL, 15, 30); //Éú³ÉÈıÍ¨µÀµÄ¸ßË¹·Ö²¼Ëæ»úÊı
-//imshow("ÈıÍ¨µÀ¸ßË¹ÔëÉù", lena_noise);
-//imshow("µ¥Í¨µÀ¸ßË¹ÔëÉù", equalLena_noise);
-//lena = lena + lena_noise; //ÔÚ²ÊÉ«Í¼ÏñÖĞÌí¼Ó¸ßË¹ÔëÉù
-//lenagray = lenagray + equalLena_noise; //ÔÚ»Ò¶ÈÍ¼ÏñÖĞÌí¼Ó¸ßË¹ÔëÉù
-////ÏÔÊ¾Ìí¼Ó¸ßË¹ÔëÉùºóµÄÍ¼Ïñ
-//imshow("lenaÌí¼ÓÔëÉù", lena);
-//imshow("equalLenaÌí¼ÓÔëÉù", lenagray);
+//imshow("lenaåŸå›¾", lena);
+//imshow("equalLenaåŸå›¾", lenagray);
+//RNG rng; //åˆ›å»ºä¸€ä¸ªRNGç±»
+//rng.fill(lena_noise, RNG::NORMAL, 10, 20); //ç”Ÿæˆä¸‰é€šé“çš„é«˜æ–¯åˆ†å¸ƒéšæœºæ•°
+//rng.fill(equalLena_noise, RNG::NORMAL, 15, 30); //ç”Ÿæˆä¸‰é€šé“çš„é«˜æ–¯åˆ†å¸ƒéšæœºæ•°
+//imshow("ä¸‰é€šé“é«˜æ–¯å™ªå£°", lena_noise);
+//imshow("å•é€šé“é«˜æ–¯å™ªå£°", equalLena_noise);
+//lena = lena + lena_noise; //åœ¨å½©è‰²å›¾åƒä¸­æ·»åŠ é«˜æ–¯å™ªå£°
+//lenagray = lenagray + equalLena_noise; //åœ¨ç°åº¦å›¾åƒä¸­æ·»åŠ é«˜æ–¯å™ªå£°
+////æ˜¾ç¤ºæ·»åŠ é«˜æ–¯å™ªå£°åçš„å›¾åƒ
+//imshow("lenaæ·»åŠ å™ªå£°", lena);
+//imshow("equalLenaæ·»åŠ å™ªå£°", lenagray);
 //imwrite("lenanoise.png", lena);
 //imwrite("lenagraynoise.png", lenagray);
 
 
-//ÏßĞÔÂË²¨    ¸ßË¹ÔëÉùÓÃ¸ßË¹ÂË²¨¸üºÅ
+//çº¿æ€§æ»¤æ³¢    é«˜æ–¯å™ªå£°ç”¨é«˜æ–¯æ»¤æ³¢æ›´å·
 
-////¾ùÖµÂË²¨
+////å‡å€¼æ»¤æ³¢
 //Mat res,res1;
 //blur(lenagraysalt, res, Size(3, 3));
 //blur(lenagraysalt, res1, Size(9, 9));
 //imshow("res", res);
 //imshow("res1", res1);
-////·½¿òÂË²¨
+////æ–¹æ¡†æ»¤æ³¢
 //Mat equalLena_32F;
 //lenagraysalt.convertTo(equalLena_32F, CV_32F, 1.0 / 255);
 //Mat resultNorm, result, dataSqrNorm, dataSqr, equalLena_32FSqr;
-////·½¿òÂË²¨boxFilter()ºÍsqrBoxFilter()
-//boxFilter(lenagraysalt, resultNorm, -1, Size(3, 3), Point(-1, -1), true);  //½øĞĞ¹éÒ»»¯
-//boxFilter(lenagraysalt, result, -1, Size(3, 3), Point(-1, -1), false);  //²»½øĞĞ¹éÒ»»¯
+////æ–¹æ¡†æ»¤æ³¢boxFilter()å’ŒsqrBoxFilter()
+//boxFilter(lenagraysalt, resultNorm, -1, Size(3, 3), Point(-1, -1), true);  //è¿›è¡Œå½’ä¸€åŒ–
+//boxFilter(lenagraysalt, result, -1, Size(3, 3), Point(-1, -1), false);  //ä¸è¿›è¡Œå½’ä¸€åŒ–
 //sqrBoxFilter(equalLena_32F, equalLena_32FSqr, -1, Size(3, 3), Point(-1, -1),
 //	true, BORDER_CONSTANT);
-////ÏÔÊ¾´¦Àí½á¹û
+////æ˜¾ç¤ºå¤„ç†ç»“æœ
 //imshow("resultNorm", resultNorm);
 //imshow("result", result);
 //imshow("equalLena_32FSqr", equalLena_32FSqr);
-////¸ßË¹ÂË²¨
-//Mat result_5gauss, result_9gauss;  //´æ·Åº¬ÓĞ¸ßË¹ÔëÉùÂË²¨½á¹û£¬ºóÃæÊı×Ö´ú±íÂË²¨Æ÷³ß´ç
-//Mat result_5salt, result_9salt;  ////´æ·Åº¬ÓĞ½·ÑÎÔëÉùÂË²¨½á¹û£¬ºóÃæÊı×Ö´ú±íÂË²¨Æ÷³ß´ç
-////µ÷ÓÃ¾ùÖµÂË²¨º¯Êıblur()½øĞĞÂË²¨
+////é«˜æ–¯æ»¤æ³¢
+//Mat result_5gauss, result_9gauss;  //å­˜æ”¾å«æœ‰é«˜æ–¯å™ªå£°æ»¤æ³¢ç»“æœï¼Œåé¢æ•°å­—ä»£è¡¨æ»¤æ³¢å™¨å°ºå¯¸
+//Mat result_5salt, result_9salt;  ////å­˜æ”¾å«æœ‰æ¤’ç›å™ªå£°æ»¤æ³¢ç»“æœï¼Œåé¢æ•°å­—ä»£è¡¨æ»¤æ³¢å™¨å°ºå¯¸
+////è°ƒç”¨å‡å€¼æ»¤æ³¢å‡½æ•°blur()è¿›è¡Œæ»¤æ³¢
 //GaussianBlur(lenagraynoise, result_5gauss, Size(5, 5), 10, 20);
 //GaussianBlur(lenagraynoise, result_9gauss, Size(9, 9), 10, 20);
 //GaussianBlur(lenagraysalt, result_5salt, Size(5, 5), 10, 20);
 //GaussianBlur(lenagraysalt, result_9salt, Size(9, 9), 10, 20);
-////ÏÔÊ¾º¬ÓĞ¸ßË¹ÔëÉùÍ¼Ïñ
+////æ˜¾ç¤ºå«æœ‰é«˜æ–¯å™ªå£°å›¾åƒ
 //imshow("equalLena_gauss", lenagraynoise);
 //imshow("result_5gauss", result_5gauss);
 //imshow("result_9gauss", result_9gauss);
-////ÏÔÊ¾º¬ÓĞ½·ÑÎÔëÉùÍ¼Ïñ
+////æ˜¾ç¤ºå«æœ‰æ¤’ç›å™ªå£°å›¾åƒ
 //imshow("equalLena_salt", lenagraysalt);
 //imshow("result_5salt", result_5salt);
 //imshow("result_9salt", result_9salt);
 
-//·ÇÏßĞÔÂË²¨  ÖĞÖµÂË²¨´¦Àí½·ÑÎÔëÉù
+//éçº¿æ€§æ»¤æ³¢  ä¸­å€¼æ»¤æ³¢å¤„ç†æ¤’ç›å™ªå£°
 
 //Mat imgResult3, grayResult3, imgResult9, grayResult9;
-////·Ö±ğ¶Ôº¬ÓĞ½·ÑÎÔëÉùµÄ²ÊÉ«ºÍ»Ò¶ÈÍ¼Ïñ½øĞĞÂË²¨£¬ÂË²¨Ä£°åÎª3¡Á3
+////åˆ†åˆ«å¯¹å«æœ‰æ¤’ç›å™ªå£°çš„å½©è‰²å’Œç°åº¦å›¾åƒè¿›è¡Œæ»¤æ³¢ï¼Œæ»¤æ³¢æ¨¡æ¿ä¸º3Ã—3
 //medianBlur(lenasalt, imgResult3, 3);
 //medianBlur(lenagraysalt, grayResult3, 3);
-////¼Ó´óÂË²¨Ä£°å£¬Í¼ÏñÂË²¨½á¹û»á±äÄ£ºı
+////åŠ å¤§æ»¤æ³¢æ¨¡æ¿ï¼Œå›¾åƒæ»¤æ³¢ç»“æœä¼šå˜æ¨¡ç³Š
 //medianBlur(lenasalt, imgResult9, 9);
 //medianBlur(lenagraysalt, grayResult9, 9);
-////ÏÔÊ¾ÂË²¨´¦Àí½á¹û
+////æ˜¾ç¤ºæ»¤æ³¢å¤„ç†ç»“æœ
 //imshow("img", lenasalt);
 //imshow("gray", lenagraysalt);
 //imshow("imgResult3", imgResult3);
@@ -531,10 +531,10 @@ int main(int argc, char** agrv) {
 //imshow("imgResult9", imgResult9);
 //imshow("grayResult9", grayResult9);
 
-//¿É·ÖÀëÂË²¨
-//X,YÁ½¸ö·½Ïò·Ö±ğ
+//å¯åˆ†ç¦»æ»¤æ³¢
+//X,Yä¸¤ä¸ªæ–¹å‘åˆ†åˆ«
 
-//±ßÔµ¼ì²â sobel scharrËã×Ó
+//è¾¹ç¼˜æ£€æµ‹ sobel scharrç®—å­
 
 //Mat sobelX,sobelY,sobelXY;
 //Sobel(lenagray, sobelX, CV_16S,1,0,3);
@@ -558,7 +558,7 @@ int main(int argc, char** agrv) {
 //cout << BXY << endl;
 //cout << CXY << endl;
 
-//ÏÈ½øĞĞ¸ßË¹Ä£ºıÈ¥³ıÔëÉù   À­ÆÕÀ­Ë¹Ëã×Ó(·½ÏòÎŞ¹Ø£¬Ò×ÊÜÔëÉùÓ°Ïì)   cannyËã×Ó
+//å…ˆè¿›è¡Œé«˜æ–¯æ¨¡ç³Šå»é™¤å™ªå£°   æ‹‰æ™®æ‹‰æ–¯ç®—å­(æ–¹å‘æ— å…³ï¼Œæ˜“å—å™ªå£°å½±å“)   cannyç®—å­
 
 //GaussianBlur(lenagray, lenagray,Size(3,3),5);
 //Mat lap, can;
@@ -566,14 +566,14 @@ int main(int argc, char** agrv) {
 //convertScaleAbs(lap, lap);
 //Canny(lenagray, can, 80, 120,3);
 
-//Á¬Í¨Óò·ÖÎö
+//è¿é€šåŸŸåˆ†æ
 
 
-//Í¼Ïñ¾àÀë±ä»»     Å·Ê½£¬½ÖÇø£¬ÆåÅÌ¾àÀë
+//å›¾åƒè·ç¦»å˜æ¢     æ¬§å¼ï¼Œè¡—åŒºï¼Œæ£‹ç›˜è·ç¦»
 
-//Í¼ÏñĞÎÌ¬Ñ§  ¸¯Ê´£¨È¥³ıÎ¢Ğ¡£¬·ÖÀë£©½á¹¹ÔªËØÅĞ¶Ï±£Áô»¹ÊÇÈ¥³ı      ÅòÕÍ
+//å›¾åƒå½¢æ€å­¦  è…èš€ï¼ˆå»é™¤å¾®å°ï¼Œåˆ†ç¦»ï¼‰ç»“æ„å…ƒç´ åˆ¤æ–­ä¿ç•™è¿˜æ˜¯å»é™¤      è†¨èƒ€
 
-//////Éú³ÉÓÃÓÚ¸¯Ê´µÄÔ­Í¼Ïñ
+//////ç”Ÿæˆç”¨äºè…èš€çš„åŸå›¾åƒ
 //Mat src = (Mat_<uchar>(6, 6) << 0, 0, 0, 0, 255, 0,
 //0, 255, 255, 255, 255, 255,
 //0, 255, 255, 255, 255, 0,
@@ -584,14 +584,14 @@ int main(int argc, char** agrv) {
 //Mat struct2 = getStructuringElement(1, Size(3, 3));
 //Mat src_erode;
 //erode(src, src_erode, struct2);
-////ÅòÕÍ  Í¨¹ı½á¹¹ÔªËØÌí¼ÓĞÂÔªËØ
+////è†¨èƒ€  é€šè¿‡ç»“æ„å…ƒç´ æ·»åŠ æ–°å…ƒç´ 
 //Mat src_dilate;
 //dilate(src, src_dilate, struct2);
 
-//ĞÎÌ¬Ñ§Ó¦ÓÃ  ¿ª£¨ÏÈ¸¯Ê´ÔÙÅòÕÍ£¬È¥³ıÍ¼ÏñÖĞµÄÔëÉù,Ïû³ı½ÏĞ¡Á¬Í¨Óò,±£Áô½Ï´óÁ¬Í¨Óò£©£¬±Õ£¨ÏÈÅòÕÍÔÙ¸¯Ê´£¬È¥³ıÁ¬Í¨ÓòÄÚµÄĞ¡ĞÍ¿Õ¶´,Æ½»¬ÎïÌåÂÖÀª,Á¬½ÓÁ½¸öÁÙ½üµÄÁ¬Í¨Óò£©
-//ĞÎÌ¬Ñ§Ìİ¶È   ¶¥Ã±  ºÚÃ±   ¼¯ÖĞ»÷²»ÖĞÔËËã
+//å½¢æ€å­¦åº”ç”¨  å¼€ï¼ˆå…ˆè…èš€å†è†¨èƒ€ï¼Œå»é™¤å›¾åƒä¸­çš„å™ªå£°,æ¶ˆé™¤è¾ƒå°è¿é€šåŸŸ,ä¿ç•™è¾ƒå¤§è¿é€šåŸŸï¼‰ï¼Œé—­ï¼ˆå…ˆè†¨èƒ€å†è…èš€ï¼Œå»é™¤è¿é€šåŸŸå†…çš„å°å‹ç©ºæ´,å¹³æ»‘ç‰©ä½“è½®å»“,è¿æ¥ä¸¤ä¸ªä¸´è¿‘çš„è¿é€šåŸŸï¼‰
+//å½¢æ€å­¦æ¢¯åº¦   é¡¶å¸½  é»‘å¸½   é›†ä¸­å‡»ä¸ä¸­è¿ç®—
 
-////ÓÃÓÚÑéÖ¤ĞÎÌ¬Ñ§Ó¦ÓÃµÄ¶şÖµ»¯¾ØÕó
+////ç”¨äºéªŒè¯å½¢æ€å­¦åº”ç”¨çš„äºŒå€¼åŒ–çŸ©é˜µ
 //Mat src = (Mat_<uchar>(9, 12) << 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 //0, 255, 255, 255, 255, 255, 255, 255, 0, 0, 255, 0,
 //0, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0,
@@ -601,41 +601,41 @@ int main(int argc, char** agrv) {
 //0, 255, 255, 255, 255, 255, 255, 255, 0, 0, 255, 0,
 //0, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0,
 //0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-////namedWindow("src", WINDOW_NORMAL);  //¿ÉÒÔ×ÔÓÉµ÷½ÚÏÔÊ¾Í¼ÏñµÄ³ß´ç
+////namedWindow("src", WINDOW_NORMAL);  //å¯ä»¥è‡ªç”±è°ƒèŠ‚æ˜¾ç¤ºå›¾åƒçš„å°ºå¯¸
 //Mat kernel = getStructuringElement(0, Size(3, 3));
 //Mat open, close, gradient,tophat, blackhat, hitmiss,lenaopen;
-//morphologyEx(src, open,MORPH_OPEN,kernel);					//ÏÈ¸¯Ê´ÔÙÅòÕÍ
-//morphologyEx(src, close, MORPH_CLOSE, kernel);				//ÏÈÅòÕÍÔÙ¸¯Ê´
-//morphologyEx(src, gradient, MORPH_GRADIENT, kernel);	//ÅòÕÍ¼õÈ¥¸¯Ê´
-//morphologyEx(src, tophat, MORPH_TOPHAT, kernel);			//Ô­Í¼¼õ¿ªÔËËã
-//morphologyEx(src, blackhat, MORPH_BLACKHAT, kernel);	//±ÕÔËËã¼õÔ­Í¼
-//morphologyEx(src, hitmiss, MORPH_HITMISS, kernel);			//ÍêÈ«ÏàÍ¬±£Áô
+//morphologyEx(src, open,MORPH_OPEN,kernel);					//å…ˆè…èš€å†è†¨èƒ€
+//morphologyEx(src, close, MORPH_CLOSE, kernel);				//å…ˆè†¨èƒ€å†è…èš€
+//morphologyEx(src, gradient, MORPH_GRADIENT, kernel);	//è†¨èƒ€å‡å»è…èš€
+//morphologyEx(src, tophat, MORPH_TOPHAT, kernel);			//åŸå›¾å‡å¼€è¿ç®—
+//morphologyEx(src, blackhat, MORPH_BLACKHAT, kernel);	//é—­è¿ç®—å‡åŸå›¾
+//morphologyEx(src, hitmiss, MORPH_HITMISS, kernel);			//å®Œå…¨ç›¸åŒä¿ç•™
 //morphologyEx(lenagray, lenaopen, MORPH_OPEN, kernel);
 
-//Í¼ÏñÏ¸»¯ ¹Ç¼Ü»¯ include ximgproc
+//å›¾åƒç»†åŒ– éª¨æ¶åŒ– include ximgproc
 
 
-//ÂÖÀª¼ì²â
+//è½®å»“æ£€æµ‹
 
 
-//ÂÖÀªµÄÃæ»ı£¬³¤¶È
+//è½®å»“çš„é¢ç§¯ï¼Œé•¿åº¦
 
 
-//Í¹°ü¼ì²â
-
-
-
-//Ö±Ïß¼ì²â »ô·ò±ä»»£¨Í¼ĞÎ¿Õ¼äÏò²ÎÊı¿Õ¼äÖĞ±ä»»£¬ÓÃ¼«×ø±ê±íÊ¾£©
+//å‡¸åŒ…æ£€æµ‹
 
 
 
-//µã¼¯ÄâºÏ fitline   minencodingcircle/triangle
+//ç›´çº¿æ£€æµ‹ éœå¤«å˜æ¢ï¼ˆå›¾å½¢ç©ºé—´å‘å‚æ•°ç©ºé—´ä¸­å˜æ¢ï¼Œç”¨æåæ ‡è¡¨ç¤ºï¼‰
 
 
-//QR¶şÎ¬ÂëÊ¶±ğ  QRcodedetector
+
+//ç‚¹é›†æ‹Ÿåˆ fitline   minencodingcircle/triangle
 
 
-//»ı·ÖÍ¼Ïñ£¨×óÉÏ·½ÏñËØÇóºÍ£©·ÀÖ¹ÖØ¸´¼ÆËã
+//QRäºŒç»´ç è¯†åˆ«  QRcodedetector
+
+
+//ç§¯åˆ†å›¾åƒï¼ˆå·¦ä¸Šæ–¹åƒç´ æ±‚å’Œï¼‰é˜²æ­¢é‡å¤è®¡ç®—
 
 //Mat lenaint, lenaintsqr, lenainttr;
 //integral(lenagray,lenaint);
@@ -646,7 +646,7 @@ int main(int argc, char** agrv) {
 //normalize(lenainttr, lenainttr, 0, 255, NORM_MINMAX);
 //normalize(lenaint, lenaint, 0, 255, NORM_MINMAX);
 
-//Í¼Ïñ·Ö¸î ÂşË®·¨£¨ÆÃË®ÑÍ¿Õ£©
+//å›¾åƒåˆ†å‰² æ¼«æ°´æ³•ï¼ˆæ³¼æ°´æ·¹ç©ºï¼‰
 
 //RNG rng(10086);
 //int connect = 4;
@@ -671,20 +671,20 @@ int main(int argc, char** agrv) {
 //	}
 //}
 
-//·ÖË®Áë·¨£¨ÅÅĞòÕÒ×¢Ë®µã£¬×¢Ë®ÕÒµ½·ÖË®Áë£©
+//åˆ†æ°´å²­æ³•ï¼ˆæ’åºæ‰¾æ³¨æ°´ç‚¹ï¼Œæ³¨æ°´æ‰¾åˆ°åˆ†æ°´å²­ï¼‰
 
 //Mat lenashed;
 //watershed(lena,lenashed);
 
-//Harris½Çµã¼ì²â
+//Harrisè§’ç‚¹æ£€æµ‹
 
-////Í¼ÏñÌİ¶È¼ÆËã£ºÊ×ÏÈ£¬¶ÔÊäÈëµÄÍ¼ÏñÓ¦ÓÃ Sobel Ëã×Ó»òÆäËûÌİ¶ÈËã×Ó£¬¼ÆËãÍ¼ÏñÔÚ x ºÍ y ·½ÏòÉÏµÄÌİ¶È¡£Õâ½«²úÉúÁ½¸öÌİ¶ÈÍ¼Ïñ£¨dx ºÍ dy£©£¬±íÊ¾Í¼ÏñÖĞÃ¿¸öÏñËØµãµÄÌİ¶È´óĞ¡ºÍ·½Ïò¡£
-////¼ÆËãĞ­·½²î¾ØÕó£º¶ÔÓÚÃ¿¸öÏñËØµã£¬Í¨¹ı¼ÆËãÔÚÆäÖÜÎ§´°¿ÚÖĞµÄÌİ¶ÈÖµµÄĞ­·½²î¾ØÕóÀ´ÆÀ¹À½ÇµãµÄ¿ÉÄÜĞÔ¡£Ğ­·½²î¾ØÕó°üÀ¨¶ÔÓ¦ÏñËØµãµÄ x ºÍ y ·½ÏòÌİ¶ÈµÄÆ½·½ºÍÒÔ¼°ËüÃÇµÄ³Ë»ı¡£
-////¼ÆËã½ÇµãÏìÓ¦º¯Êı£ºÀûÓÃĞ­·½²î¾ØÕóµÄÌØÕ÷ÖµÀ´¼ÆËã½ÇµãÏìÓ¦º¯Êı¡£Í¨³££¬Ê¹ÓÃÒÔÏÂÏìÓ¦º¯Êı R À´ÆÀ¹À½ÇµãµÄÖØÒªĞÔ£º
-////R = ¦Ë1 * ¦Ë2 - k * (¦Ë1 + ¦Ë2) ^ 2
-////ÆäÖĞ£¬¦Ë1 ºÍ ¦Ë2 ÊÇĞ­·½²î¾ØÕóµÄÌØÕ÷Öµ£¬k ÊÇÒ»¸ö¾­Ñé³£Êı¡£
-////·Ç¼«´óÖµÒÖÖÆ£ºÔÚ¼ÆËã½ÇµãÏìÓ¦º¯Êıºó£¬¸ù¾İÏìÓ¦º¯ÊıµÄÖµ£¬¶ÔÃ¿¸öÏñËØµã½øĞĞ·Ç¼«´óÖµÒÖÖÆ¡£ÕâÒâÎ¶×ÅÖ»ÓĞµ±µ±Ç°ÏñËØµãµÄÏìÓ¦ÖµÊÇÆäÖÜÎ§ÏñËØµãÖĞ×î´óµÄÊ±ºò£¬²Å½«¸ÃÏñËØµã×÷Îª½Çµã¡£
-////ÉèÖÃãĞÖµ£º¿ÉÒÔ¸ù¾İÓ¦ÓÃµÄĞèÇóÉèÖÃÒ»¸öãĞÖµ£¬È¥³ıÏìÓ¦º¯ÊıµÍÓÚãĞÖµµÄ½Çµã¡£
+////å›¾åƒæ¢¯åº¦è®¡ç®—ï¼šé¦–å…ˆï¼Œå¯¹è¾“å…¥çš„å›¾åƒåº”ç”¨ Sobel ç®—å­æˆ–å…¶ä»–æ¢¯åº¦ç®—å­ï¼Œè®¡ç®—å›¾åƒåœ¨ x å’Œ y æ–¹å‘ä¸Šçš„æ¢¯åº¦ã€‚è¿™å°†äº§ç”Ÿä¸¤ä¸ªæ¢¯åº¦å›¾åƒï¼ˆdx å’Œ dyï¼‰ï¼Œè¡¨ç¤ºå›¾åƒä¸­æ¯ä¸ªåƒç´ ç‚¹çš„æ¢¯åº¦å¤§å°å’Œæ–¹å‘ã€‚
+////è®¡ç®—åæ–¹å·®çŸ©é˜µï¼šå¯¹äºæ¯ä¸ªåƒç´ ç‚¹ï¼Œé€šè¿‡è®¡ç®—åœ¨å…¶å‘¨å›´çª—å£ä¸­çš„æ¢¯åº¦å€¼çš„åæ–¹å·®çŸ©é˜µæ¥è¯„ä¼°è§’ç‚¹çš„å¯èƒ½æ€§ã€‚åæ–¹å·®çŸ©é˜µåŒ…æ‹¬å¯¹åº”åƒç´ ç‚¹çš„ x å’Œ y æ–¹å‘æ¢¯åº¦çš„å¹³æ–¹å’Œä»¥åŠå®ƒä»¬çš„ä¹˜ç§¯ã€‚
+////è®¡ç®—è§’ç‚¹å“åº”å‡½æ•°ï¼šåˆ©ç”¨åæ–¹å·®çŸ©é˜µçš„ç‰¹å¾å€¼æ¥è®¡ç®—è§’ç‚¹å“åº”å‡½æ•°ã€‚é€šå¸¸ï¼Œä½¿ç”¨ä»¥ä¸‹å“åº”å‡½æ•° R æ¥è¯„ä¼°è§’ç‚¹çš„é‡è¦æ€§ï¼š
+////R = Î»1 * Î»2 - k * (Î»1 + Î»2) ^ 2
+////å…¶ä¸­ï¼ŒÎ»1 å’Œ Î»2 æ˜¯åæ–¹å·®çŸ©é˜µçš„ç‰¹å¾å€¼ï¼Œk æ˜¯ä¸€ä¸ªç»éªŒå¸¸æ•°ã€‚
+////éæå¤§å€¼æŠ‘åˆ¶ï¼šåœ¨è®¡ç®—è§’ç‚¹å“åº”å‡½æ•°åï¼Œæ ¹æ®å“åº”å‡½æ•°çš„å€¼ï¼Œå¯¹æ¯ä¸ªåƒç´ ç‚¹è¿›è¡Œéæå¤§å€¼æŠ‘åˆ¶ã€‚è¿™æ„å‘³ç€åªæœ‰å½“å½“å‰åƒç´ ç‚¹çš„å“åº”å€¼æ˜¯å…¶å‘¨å›´åƒç´ ç‚¹ä¸­æœ€å¤§çš„æ—¶å€™ï¼Œæ‰å°†è¯¥åƒç´ ç‚¹ä½œä¸ºè§’ç‚¹ã€‚
+////è®¾ç½®é˜ˆå€¼ï¼šå¯ä»¥æ ¹æ®åº”ç”¨çš„éœ€æ±‚è®¾ç½®ä¸€ä¸ªé˜ˆå€¼ï¼Œå»é™¤å“åº”å‡½æ•°ä½äºé˜ˆå€¼çš„è§’ç‚¹ã€‚
 //Mat harris;
 //cornerHarris(lena, harris, 2, 3,0.04);
 //Mat harris_norm;
@@ -709,7 +709,7 @@ int main(int argc, char** agrv) {
 //imshow("cornermap", harris_norm);
 //imshow("corner", lena);
 
-//hsi-Tomas½Çµã¼ì²â ÅĞ¶ÏÊÇ·ñÎª½Çµã²»Í¬
+//hsi-Tomasè§’ç‚¹æ£€æµ‹ åˆ¤æ–­æ˜¯å¦ä¸ºè§’ç‚¹ä¸åŒ
 
 //vector<Point2f> corners;
 //goodFeaturesToTrack(lenagray, corners,100,0.01,0.04,Mat());
@@ -722,7 +722,7 @@ int main(int argc, char** agrv) {
 //}
 //drawKeypoints(lena, kp, lena);
 
-//½Çµã¼ì²âÑÇÏñËØÓÅ»¯
+//è§’ç‚¹æ£€æµ‹äºšåƒç´ ä¼˜åŒ–
 
 //vector<Point2f> corners;
 //goodFeaturesToTrack(lenagray, corners, 100, 0.01, 0.04, Mat());
@@ -743,7 +743,7 @@ int main(int argc, char** agrv) {
 //}
 //drawKeypoints(lena, kp, lena);
 
-//ORBÌØÕ÷µã
+//ORBç‰¹å¾ç‚¹
 
 //Ptr<ORB> orb =  ORB::create();
 //vector<KeyPoint> kps;
@@ -755,7 +755,7 @@ int main(int argc, char** agrv) {
 //namedWindow("lena", WINDOW_FREERATIO);
 //imshow("lena", lena);
 
-//ÌØÕ÷µãÆ¥Åä
+//ç‰¹å¾ç‚¹åŒ¹é…
 
 //vector<KeyPoint>kps1, kps2;
 //Mat des1, des2;
@@ -785,7 +785,7 @@ int main(int argc, char** agrv) {
 //namedWindow("out", WINDOW_FREERATIO);
 //imshow("out", out);
 
-//RANSACÌØÕ÷µãÓÅ»¯
+//RANSACç‰¹å¾ç‚¹ä¼˜åŒ–
 
 //vector<KeyPoint>kps1, kps2;
 //Mat des1, des2;
@@ -808,7 +808,7 @@ int main(int argc, char** agrv) {
 //namedWindow("grc", WINDOW_FREERATIO);
 //imshow("grc", sc);
 
-//µ¥Ä¿Ïà»úÄ£ĞÍ£¬±ê¶¨
+//å•ç›®ç›¸æœºæ¨¡å‹ï¼Œæ ‡å®š
 
 //vector<Mat>imgs;
 //string imgname;
